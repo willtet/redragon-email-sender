@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class OutrosDto extends EmailBaseDto{
-    private String mensagem;
+    private String duvida;
 
 }
