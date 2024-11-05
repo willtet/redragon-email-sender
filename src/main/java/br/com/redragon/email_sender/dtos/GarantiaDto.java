@@ -13,5 +13,5 @@ public class GarantiaDto extends EmailBaseDto{
     private Date dataCompra;
     private List<FileDto> fotos;
     private List<FileDto> notaFiscal;
-
+    private String mensagem;
 }

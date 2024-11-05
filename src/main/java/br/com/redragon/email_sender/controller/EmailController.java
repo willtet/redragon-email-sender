@@ -35,8 +35,8 @@ public class EmailController {
     }
 
     @PostMapping("/software")
-    public String softwareMail(@RequestBody GarantiaDto dto) {
-        return emailService.enviarGarantia(dto);
+    public String softwareMail(@RequestBody SoftwareDto dto) {
+        return emailService.enviarSoftware(dto);
     }
 
     @PostMapping("/outros")
@@ -46,11 +46,16 @@ public class EmailController {
 
     @PostMapping("/revenda")
     public String revendaMail(@RequestBody RevendaDto dto) {
-        return emailService.enviarParcerias(dto);
+        return emailService.enviarRevenda(dto);
     }
 
     @PostMapping("/parceria")
-    public String parceriaMail(@RequestBody RevendaDto dto) {
+    public String parceriaMail(@RequestBody ParceriasDto dto) {
         return emailService.enviarParcerias(dto);
+    }
+
+    @PostMapping("/duvida")
+    public String duvidaMail(@RequestBody DuvidasDto dto) {
+        return emailService.enviarDuvidas(dto);
     }
 }

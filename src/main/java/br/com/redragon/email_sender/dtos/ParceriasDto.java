@@ -11,4 +11,5 @@ import java.util.Map;
 public class ParceriasDto extends EmailBaseDto {
     private List<FileDto> apresentacao;
     private String mensagem;
+    private String apresentacaoArquivo;
 }
