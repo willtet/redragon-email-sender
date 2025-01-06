@@ -8,6 +8,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -30,32 +31,32 @@ public class EmailController {
 
 
     @PostMapping("/garantia")
-    public String garantiaMail(@RequestBody GarantiaDto dto) {
-        return emailService.enviarGarantia(dto);
+    public ResponseEntity<Object> garantiaMail(@RequestBody GarantiaDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarGarantia(dto));
     }
 
     @PostMapping("/software")
-    public String softwareMail(@RequestBody SoftwareDto dto) {
-        return emailService.enviarSoftware(dto);
+    public ResponseEntity<Object> softwareMail(@RequestBody SoftwareDto dto) {;
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarSoftware(dto));
     }
 
     @PostMapping("/outros")
-    public String outrosMail(@RequestBody OutrosDto dto) {
-        return emailService.enviarOutros(dto);
+    public ResponseEntity<Object> outrosMail(@RequestBody OutrosDto dto) {;
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarOutros(dto));
     }
 
     @PostMapping("/revenda")
-    public String revendaMail(@RequestBody RevendaDto dto) {
-        return emailService.enviarRevenda(dto);
+    public ResponseEntity<Object> revendaMail(@RequestBody RevendaDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarRevenda(dto));
     }
 
     @PostMapping("/parceria")
-    public String parceriaMail(@RequestBody ParceriasDto dto) {
-        return emailService.enviarParcerias(dto);
+    public ResponseEntity<Object> parceriaMail(@RequestBody ParceriasDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarParcerias(dto));
     }
 
     @PostMapping("/duvida")
-    public String duvidaMail(@RequestBody DuvidasDto dto) {
-        return emailService.enviarDuvidas(dto);
+    public ResponseEntity<Object> duvidaMail(@RequestBody DuvidasDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarDuvidas(dto));
     }
 }

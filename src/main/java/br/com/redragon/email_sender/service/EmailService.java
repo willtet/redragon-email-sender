@@ -5,6 +5,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -22,6 +23,12 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
+    @Value("${mail.bcc}")
+    private String bcc;
+
     public String enviarGarantia(GarantiaDto dto){
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -37,12 +44,12 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp");
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Garantia - Redragon");
             helper.setText(
                     "- Nome Completo: " + dto.getNomeCompleto() + "\r" +
@@ -86,12 +93,12 @@ public class EmailService {
             }
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp");
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Parcerias - Redragon");
             helper.setText(
                     "- Nome Completo: " + dto.getNomeCompleto() + "\r" +
@@ -122,12 +129,12 @@ public class EmailService {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp", dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Outras dúvidas - Redragon");
             helper.setText(
                     "- Nome Completo: "+dto.getNomeCompleto() + "\r" +
@@ -147,12 +154,12 @@ public class EmailService {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp", dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Revenda - Redragon");
             helper.setText(
                     "- Nome Completo: "+dto.getNomeCompleto() + "\r" +
@@ -183,12 +190,12 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp");
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Dúvidas - Redragon");
             helper.setText(
                     "- Nome Completo: " + dto.getNomeCompleto() + "\r" +
@@ -224,12 +231,12 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress("willian0404@hotmail.co.jp");
+            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(new InternetAddress("williantet@gmail.com", dto.getNomeCompleto()));
-            helper.setTo(destinatario);
-            helper.setCc(dto.getEmail());
+            helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
+            helper.setTo(dto.getEmail());
+            helper.addBcc(destinatario);
             helper.setSubject("Software - Redragon");
             helper.setText(
                     "- Nome Completo: " + dto.getNomeCompleto() + "\r" +
