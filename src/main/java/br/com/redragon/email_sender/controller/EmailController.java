@@ -29,7 +29,6 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-
     @PostMapping("/garantia")
     public ResponseEntity<Object> garantiaMail(@RequestBody GarantiaDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarGarantia(dto));

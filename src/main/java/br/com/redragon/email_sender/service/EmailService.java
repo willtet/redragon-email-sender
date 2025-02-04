@@ -16,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class EmailService {
@@ -35,10 +36,12 @@ public class EmailService {
 
             StringBuilder fotosNomes = new StringBuilder();
             for (FileDto foto : dto.getFotos()) {
+                foto.setName(UUID.randomUUID()+"_"+ foto.getName());
                 fotosNomes.append(foto.getName()).append(", ");
             }
             StringBuilder notaFiscalNomes = new StringBuilder();
             for (FileDto nota : dto.getNotaFiscal()) {
+                nota.setName(UUID.randomUUID()+"_"+ nota.getName());
                 notaFiscalNomes.append(nota.getName()).append(", ");
             }
 
@@ -89,6 +92,7 @@ public class EmailService {
 
             StringBuilder apresentacaoNomes = new StringBuilder();
             for (FileDto foto : dto.getApresentacao()) {
+                foto.setName(UUID.randomUUID()+"_"+ foto.getName());
                 apresentacaoNomes.append(foto.getName()).append(", ");
             }
 
@@ -222,10 +226,12 @@ public class EmailService {
 
             StringBuilder fotosNomes = new StringBuilder();
             for (FileDto foto : dto.getFotos()) {
+                foto.setName(UUID.randomUUID()+"_"+ foto.getName());
                 fotosNomes.append(foto.getName()).append(", ");
             }
             StringBuilder notaProblemas = new StringBuilder();
             for (FileDto nota : dto.getProblema()) {
+                nota.setName(UUID.randomUUID()+"_"+ nota.getName());
                 notaProblemas.append(nota.getName()).append(", ");
             }
 
