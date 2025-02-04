@@ -27,8 +27,14 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String from;
 
-    @Value("${mail.bcc}")
-    private String bcc;
+    @Value("${mail.suporte}")
+    private String suporte;
+
+    @Value("${mail.rony}")
+    private String mailRony;
+
+    @Value("${mail.marketing}")
+    private String mailMarketing;
 
     public String enviarGarantia(GarantiaDto dto){
         try {
@@ -47,7 +53,7 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(suporte, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -64,7 +70,8 @@ public class EmailService {
                             "- Data da Compra: " + formatter.format(dto.getDataCompra()) + "\r" +
                             "- Fotos: " + fotosNomes.toString() + "\r" +
                             "- Nota Fiscal: " + notaFiscalNomes.toString() + "\r" +
-                            (Objects.nonNull(dto.getMensagem()) ? "- Por que sua Nota Fiscal não está disponível? : " + dto.getMensagem() : "")
+                            (Objects.nonNull(dto.getMensagem()) ? "- Por que sua Nota Fiscal não está disponível? : " + dto.getMensagem() + "\r": "") +
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
             );
 
             // Adiciona as fotos como anexo ao email
@@ -97,7 +104,7 @@ public class EmailService {
             }
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(mailMarketing, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -109,7 +116,8 @@ public class EmailService {
                             "- Email: " + dto.getEmail() + "\r" +
                             "- Telefone: " + dto.getTelefone() + "\r" +
                             "- Mensagem: " + dto.getMensagem() + "\r" +
-                            "- Apresentação: " + (Objects.isNull(dto.getApresentacaoArquivo()) ? apresentacaoNomes.toString() : dto.getApresentacaoArquivo()) + "\r"
+                            "- Apresentação: " + (Objects.isNull(dto.getApresentacaoArquivo()) ? apresentacaoNomes.toString() : dto.getApresentacaoArquivo()) + "\r"+
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
 
 
             );
@@ -133,7 +141,7 @@ public class EmailService {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(suporte, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -144,7 +152,9 @@ public class EmailService {
                     "- Nome Completo: "+dto.getNomeCompleto() + "\r" +
                             "- Email: "+dto.getEmail() + "\r" +
                             "- Telefone: "+dto.getTelefone() + "\r" +
-                            "- Por favor, descreva sua dúvida abaixo: \r" + dto.getDuvida());
+                            "- Por favor, descreva sua dúvida abaixo: \r" + dto.getDuvida() +
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
+            );
 
             // Envia o email
             mailSender.send(message);
@@ -158,7 +168,7 @@ public class EmailService {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(mailRony, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -176,7 +186,8 @@ public class EmailService {
                             "- Cidade: " + dto.getCidade() + "\r" +
                             "- Inscrição Estadual: " + dto.getInscricaoEstadual() + "\r" +
                             "- Mensagem para a marca: \n" + dto.getMensagemMarca() + "\r" +
-                            "- Observações: \n" + dto.getObservacao()
+                            "- Observações: \n" + dto.getObservacao() +
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
 
             );
 
@@ -194,7 +205,7 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(suporte, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -209,7 +220,8 @@ public class EmailService {
                             "- Série Produto: " + dto.getSerieProduto() + "\r" +
                             "- Descrição: " + dto.getProblemaDetalhado() + "\r" +
                             "- Data da Compra: " + formatter.format(dto.getDataCompra()) + "\r" +
-                            "- Resumo do problema: " + dto.getProblemaResumo() + "\r"
+                            "- Resumo do problema: " + dto.getProblemaResumo() + "\r" +
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
             );
 
             mailSender.send(message);
@@ -237,7 +249,7 @@ public class EmailService {
 
 
             MimeMessage message = mailSender.createMimeMessage();
-            InternetAddress destinatario = new InternetAddress(bcc, dto.getNomeCompleto());
+            InternetAddress destinatario = new InternetAddress(suporte, dto.getNomeCompleto());
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(new InternetAddress(from, dto.getNomeCompleto()));
@@ -257,7 +269,8 @@ public class EmailService {
                             (Objects.nonNull(dto.getMudancaOS()) ?  ("- Mudança no Sistema Operacional: " + dto.getMudancaOS() + "\r") : "") +
                             "- Caso: " + dto.getCaso() + "\r" +
                             "- Fotos: " + fotosNomes.toString() + "\r" +
-                            ( notaProblemas.isEmpty() ? "" : ("- Problemas: " + notaProblemas.toString()))
+                            ( notaProblemas.isEmpty() ? "" : ("- Problemas: " + notaProblemas.toString())) +
+                            "\r\n\nEste é um e-mail enviado automaticamente. Por gentileza, não responda a esta mensagem."
             );
 
             // Adiciona as fotos como anexo ao email
