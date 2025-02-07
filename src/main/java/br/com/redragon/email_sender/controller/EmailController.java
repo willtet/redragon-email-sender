@@ -1,10 +1,12 @@
 package br.com.redragon.email_sender.controller;
 
+import br.com.redragon.email_sender.configuration.RabbitMQConfig;
 import br.com.redragon.email_sender.dtos.*;
 import br.com.redragon.email_sender.service.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -29,9 +31,14 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @PostMapping("/garantia")
     public ResponseEntity<Object> garantiaMail(@RequestBody GarantiaDto dto) {
-        return ResponseEntity.status(HttpStatus.OK).body(emailService.enviarGarantia(dto));
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.QUEUE_GARANTIA, dto);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Email enviado com sucesso!");
     }
 
     @PostMapping("/software")
